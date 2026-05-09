@@ -191,8 +191,7 @@
         ['education', 'degree & certs'],
         ['certs', 'AWS certifications'],
         ['now', 'what I am learning right now'],
-        ['ai', 'open AI / RAG Knowledge Hub'],
-        ['study', 'open Cert Study Vault'],
+        ['vault', 'open Study Vault — 4 free study sites'],
         ['contact', 'how to reach me'],
         ['socials', 'all social links'],
         ['github', 'open my GitHub'],
@@ -278,19 +277,16 @@
       appendLine('<span class="t-out">◐ Kubernetes the Hard Way — 3/12 modules complete</span>');
     },
 
-    ai: () => {
-      appendLine('<span class="t-section">// AI Knowledge Hub</span>');
-      appendLine('<span class="t-out">RAG Architecture · Curated reading list · Patterns I keep going back to</span>');
-      appendLine('<span class="t-out">→ opening AI Knowledge Hub panel ...</span>');
-      window.dispatchEvent(new CustomEvent('drawer:open', { detail: { view: 'ai-hub' } }));
+    vault: () => {
+      appendLine('<span class="t-section">// Study Vault — 4 free study sites</span>');
+      appendLine('<span class="t-out">🐳 Docker          · <a class="t-link" href="https://deven1003.github.io/study-vault-docker/" target="_blank" rel="noreferrer">study-vault-docker</a></span>');
+      appendLine('<span class="t-out">⎈ Kubernetes      · <a class="t-link" href="https://deven1003.github.io/study-vault-kubernetes/" target="_blank" rel="noreferrer">study-vault-kubernetes</a></span>');
+      appendLine('<span class="t-out">☁ AWS Cloud Prac. · <a class="t-link" href="https://deven1003.github.io/study-vault-aws-cloud-practitioner/" target="_blank" rel="noreferrer">study-vault-aws-cloud-practitioner</a></span>');
+      appendLine('<span class="t-out">◇ AWS AI Prac.    · <a class="t-link" href="https://deven1003.github.io/study-vault-aws-ai-practitioner/" target="_blank" rel="noreferrer">study-vault-aws-ai-practitioner</a></span>');
     },
 
-    study: () => {
-      appendLine('<span class="t-section">// Cert Study Vault</span>');
-      appendLine('<span class="t-out">AWS Cloud Practitioner · AI Practitioner · Notes &amp; PDFs</span>');
-      appendLine('<span class="t-out">→ opening Cert Study Vault panel ...</span>');
-      window.dispatchEvent(new CustomEvent('drawer:open', { detail: { view: 'study-hub' } }));
-    },
+    ai: () => commands.vault(),
+    study: () => commands.vault(),
 
     contact: () => {
       appendLine('<span class="t-section">// Contact</span>');
@@ -319,10 +315,9 @@
       appendLine('<pre class="t-tree">portfolio/' +
         '\n├── about/' +
         '\n├── stack/' +
-        '\n├── ai-hub/         <span class="t-cmd-hint">// new — RAG arch &amp; reading list</span>' +
         '\n├── experience/' +
         '\n├── projects/' +
-        '\n├── study-hub/      <span class="t-cmd-hint">// AWS cert resources</span>' +
+        '\n├── study-vault/    <span class="t-cmd-hint">// 4 free study sites — try `vault`</span>' +
         '\n├── now/' +
         '\n├── education/' +
         '\n└── contact/</pre>');
@@ -467,141 +462,5 @@
     });
   });
 
-  // ============================================================
-  // DRAWER OVERLAY — AI Hub / Study Vault
-  // ============================================================
-  const drawer = {
-    shell: document.getElementById('drawer-shell'),
-    title: document.getElementById('drawer-title'),
-    eyebrow: document.getElementById('drawer-eyebrow'),
-    views: document.querySelectorAll('.drawer-view'),
-    navCards: document.querySelectorAll('[data-drawer-switch]'),
-    isOpen: false,
-    activeView: null,
-    lastFocus: null,
-  };
-
-  const VIEW_META = {
-    'ai-hub': {
-      title: 'AI Knowledge Hub',
-      eyebrow: 'Resources · 02',
-    },
-    'study-hub': {
-      title: 'Certification Study Vault',
-      eyebrow: 'Resources · 01',
-    },
-  };
-
-  function openDrawer(viewKey) {
-    if (!drawer.shell || !VIEW_META[viewKey]) return;
-    drawer.lastFocus = document.activeElement;
-    drawer.activeView = viewKey;
-    drawer.shell.setAttribute('aria-hidden', 'false');
-    drawer.shell.classList.add('open');
-    document.body.classList.add('drawer-locked');
-    drawer.isOpen = true;
-    switchView(viewKey);
-    // Highlight matching side-dock button
-    document.querySelectorAll('.side-dock-btn').forEach((b) => {
-      b.classList.toggle('active', b.dataset.drawerOpen === viewKey);
-    });
-    setTimeout(() => {
-      const closeBtn = drawer.shell.querySelector('.drawer-close-btn');
-      if (closeBtn) closeBtn.focus();
-    }, 200);
-    if (history.replaceState) {
-      history.replaceState(null, '', '#' + viewKey);
-    }
-  }
-
-  function closeDrawer() {
-    if (!drawer.shell || !drawer.isOpen) return;
-    drawer.shell.setAttribute('aria-hidden', 'true');
-    drawer.shell.classList.remove('open');
-    document.body.classList.remove('drawer-locked');
-    drawer.isOpen = false;
-    // Remove active state from side-dock buttons
-    document.querySelectorAll('.side-dock-btn').forEach((b) => {
-      b.classList.remove('active');
-    });
-    if (drawer.lastFocus && drawer.lastFocus.focus) drawer.lastFocus.focus();
-    if (history.replaceState) {
-      history.replaceState(null, '', window.location.pathname + window.location.search);
-    }
-  }
-
-  function switchView(viewKey) {
-    if (!VIEW_META[viewKey]) return;
-    drawer.activeView = viewKey;
-    drawer.views.forEach((v) => {
-      const isActive = v.dataset.drawerView === viewKey;
-      v.classList.toggle('drawer-view-active', isActive);
-    });
-    drawer.navCards.forEach((c) => {
-      c.classList.toggle('active', c.dataset.drawerSwitch === viewKey);
-    });
-    if (drawer.title) drawer.title.textContent = VIEW_META[viewKey].title;
-    if (drawer.eyebrow) drawer.eyebrow.textContent = VIEW_META[viewKey].eyebrow;
-    // Scroll content to top when switching
-    const content = document.getElementById('drawer-content');
-    if (content) content.scrollTop = 0;
-    // Trigger scroll-reveal animations for elements inside this view (with stagger)
-    const view = document.querySelector('[data-drawer-view="' + viewKey + '"]');
-    if (view) {
-      const targets = view.querySelectorAll('.scroll-reveal');
-      targets.forEach((el, i) => {
-        el.classList.remove('visible');
-        setTimeout(() => el.classList.add('visible'), 60 + i * 30);
-      });
-    }
-  }
-
-  // Wire up open triggers
-  document.querySelectorAll('[data-drawer-open]').forEach((el) => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      const viewKey = el.dataset.drawerOpen;
-      openDrawer(viewKey);
-    });
-  });
-
-  // Wire up close triggers
-  document.querySelectorAll('[data-drawer-close]').forEach((el) => {
-    el.addEventListener('click', (e) => {
-      // If it's also a switch trigger, don't close
-      if (el.dataset.drawerSwitch) return;
-      e.preventDefault();
-      closeDrawer();
-    });
-  });
-
-  // Wire up switch triggers
-  drawer.navCards.forEach((card) => {
-    card.addEventListener('click', (e) => {
-      e.preventDefault();
-      switchView(card.dataset.drawerSwitch);
-    });
-  });
-
-  // Listen for terminal-issued open events
-  window.addEventListener('drawer:open', (e) => {
-    if (e.detail && e.detail.view) openDrawer(e.detail.view);
-  });
-
-  // Escape key closes drawer
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer.isOpen) {
-      closeDrawer();
-    }
-  });
-
-  // Deep-link support: if URL hash is #ai-hub or #study-hub on load, open drawer
-  function checkInitialHash() {
-    const hash = window.location.hash.replace('#', '');
-    if (VIEW_META[hash]) {
-      // Wait briefly for layout to stabilize
-      setTimeout(() => openDrawer(hash), 250);
-    }
-  }
-  if (drawer.shell) checkInitialHash();
+  // (Drawer overlay system removed — Study Vault is now an inline section linking to 4 GitHub Pages sites.)
 })();

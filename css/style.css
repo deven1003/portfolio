@@ -2180,3 +2180,214 @@ body.drawer-locked { overflow: hidden; }
   line-height: 1.55;
 }
 
+
+/* ============================================================
+   STUDY VAULT — 4 GitHub Pages site cards
+   ============================================================ */
+.study-vault { position: relative; }
+.study-vault::before {
+  content: '';
+  position: absolute;
+  inset: -10% -5% auto auto;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle at 70% 30%, var(--cloud-glow), transparent 60%);
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.vault-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.vault-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.6rem 1.5rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.3s ease,
+              box-shadow 0.4s ease;
+  isolation: isolate;
+}
+.vault-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent 40%, var(--accent, var(--cloud-glow)) 90%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.vault-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+}
+.vault-card:hover::after { opacity: 0.9; }
+
+.vault-card-glow {
+  position: absolute;
+  inset: -40% -40% auto auto;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, var(--accent, var(--cloud-glow)), transparent 70%);
+  filter: blur(50px);
+  opacity: 0.18;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+.vault-card:hover .vault-card-glow { opacity: 0.45; }
+
+/* Per-card accent colour */
+.vault-docker { --accent: rgba(36, 150, 237, 0.55); }
+.vault-k8s    { --accent: rgba(50, 108, 229, 0.55); }
+.vault-cloud  { --accent: var(--cloud-glow); }
+.vault-ai     { --accent: var(--ai-glow); }
+
+.vault-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+.vault-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 1.4rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+}
+.vault-docker .vault-icon { color: #2496ed; box-shadow: 0 0 0 1px rgba(36, 150, 237, 0.25) inset; }
+.vault-k8s    .vault-icon { color: #326ce5; box-shadow: 0 0 0 1px rgba(50, 108, 229, 0.25) inset; }
+.vault-cloud  .vault-icon { color: var(--cloud); box-shadow: 0 0 0 1px var(--cloud-soft) inset; }
+.vault-ai     .vault-icon { color: var(--ai); box-shadow: 0 0 0 1px var(--ai-soft) inset; }
+
+.vault-tag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.vault-docker .vault-tag,
+.vault-k8s    .vault-tag { color: #6db4ff; border-color: rgba(50, 108, 229, 0.35); }
+.vault-cloud  .vault-tag { color: var(--cloud); border-color: var(--cloud-soft); }
+.vault-ai     .vault-tag { color: var(--ai); border-color: var(--ai-soft); }
+
+.vault-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.vault-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  flex-grow: 0;
+}
+
+.vault-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0.2rem 0 0.4rem;
+  padding: 0;
+}
+.vault-bullets li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.vault-bullets li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent, var(--cloud));
+  opacity: 0.85;
+}
+
+.vault-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--border);
+}
+.vault-cta {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+.vault-arrow {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.3s ease;
+}
+.vault-card:hover .vault-arrow {
+  transform: translate(4px, -4px);
+}
+.vault-docker:hover .vault-arrow,
+.vault-docker:hover .vault-cta { color: #6db4ff; }
+.vault-k8s:hover    .vault-arrow,
+.vault-k8s:hover    .vault-cta { color: #6db4ff; }
+.vault-cloud:hover  .vault-arrow,
+.vault-cloud:hover  .vault-cta { color: var(--cloud); }
+.vault-ai:hover     .vault-arrow,
+.vault-ai:hover     .vault-cta { color: var(--ai); }
+
+/* Side-dock — extra icon variants for Docker / K8s */
+.sd-icon-docker { background: rgba(36, 150, 237, 0.15); color: #6db4ff; }
+.sd-icon-k8s    { background: rgba(50, 108, 229, 0.15); color: #6db4ff; }
+
+/* When dock has 4 items, ensure it stays visible without overflow on shorter screens */
+@media (max-height: 720px) and (min-width: 761px) {
+  .side-dock { gap: 0.35rem; padding: 0.7rem 0.7rem 0.85rem; }
+  .side-dock-btn { padding: 0.55rem 0.65rem; }
+  .sd-icon { width: 30px; height: 30px; font-size: 0.95rem; }
+  .sd-name { font-size: 0.8rem; }
+  .sd-sub  { font-size: 0.68rem; }
+}
+
+/* Mobile: collapse 4-item dock into a more compact horizontal bar */
+@media (max-width: 760px) {
+  .vault-bullets { display: none; }
+  .vault-card { padding: 1.3rem 1.2rem; }
+}
