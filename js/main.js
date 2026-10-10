@@ -241,7 +241,7 @@
     },
 
     experience: () => {
-      appendLine('<span class="t-section">// Feedspot · Jun 2024 – Present</span>');
+      appendLine('<span class="t-section">// AI Engineer @ Feedspot · Jun 2024 – Present</span>');
       appendLine('<span class="t-out">◇ RAG + pgvector semantic search over millions of podcast episodes</span>');
       appendLine('<span class="t-out">◇ Production LLM integrations: Claude API, OpenAI API, Amazon Bedrock, Amazon Q</span>');
       appendLine('<span class="t-out">▹ AI-assisted pipeline automation, +30% processing efficiency</span>');
