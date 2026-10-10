@@ -188,7 +188,7 @@
         ['skills', 'tech I work with'],
         ['projects', 'featured AI projects'],
         ['experience', 'work history'],
-        ['education', 'degree & certs'],
+        ['education', 'degree'],
         ['certs', 'certifications'],
         ['resources', 'free study guides I publish'],
         ['contact', 'how to reach me'],
@@ -251,13 +251,15 @@
     education: () => {
       appendLine('<span class="t-section">// Education</span>');
       appendLine('<span class="t-out">🎓 B.E. Computer Science &amp; Engineering · VCET (2020-2024) · CGPA 9.143</span>');
-      commands.certs();
     },
 
     certs: () => {
       appendLine('<span class="t-section">// Certifications</span>');
-      appendLine('<span class="t-success">✓ 4× AWS Certified (incl. Cloud Practitioner &amp; AI Practitioner)</span>');
-      appendLine('<span class="t-success">✓ 1× Microsoft Certified</span>');
+      appendLine('<span class="t-success">✓ AWS Certified AI Practitioner · 2026</span>');
+      appendLine('<span class="t-success">✓ Microsoft Certified: SQL AI Developer Associate · 2026</span>');
+      appendLine('<span class="t-success">✓ AWS MLOps Demonstrated · 2026</span>');
+      appendLine('<span class="t-success">✓ AWS Serverless Demonstrated · 2026</span>');
+      appendLine('<span class="t-success">✓ AWS Certified Cloud Practitioner · 2025</span>');
     },
 
     resources: () => {
@@ -294,6 +296,7 @@
         '\n├── experience/' +
         '\n├── projects/' +
         '\n├── resources/' +
+        '\n├── certifications/' +
         '\n├── education/' +
         '\n└── contact/</pre>');
     },
