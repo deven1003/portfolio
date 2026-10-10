@@ -186,14 +186,12 @@
         ['help', 'show this list'],
         ['whoami', 'about me'],
         ['skills', 'tech I work with'],
-        ['projects', 'projects & pipelines'],
+        ['projects', 'featured AI projects'],
         ['experience', 'work history'],
         ['education', 'degree & certs'],
-        ['certs', 'AWS certifications'],
-        ['now', 'what I am learning right now'],
-        ['vault', 'open Study Vault — 4 free study sites'],
+        ['certs', 'certifications'],
+        ['resources', 'free study guides I publish'],
         ['contact', 'how to reach me'],
-        ['socials', 'all social links'],
         ['github', 'open my GitHub'],
         ['linkedin', 'open my LinkedIn'],
         ['ls', 'list portfolio sections'],
@@ -211,94 +209,72 @@
     },
 
     whoami: () => {
-      appendLine('<span class="t-out">Deven Kalathiya — Cloud &amp; DevOps Engineer based in Mumbai 🇮🇳</span>');
-      appendLine('<span class="t-out">AWS Certified Cloud Practitioner · AI Practitioner (in progress)</span>');
-      appendLine('<span class="t-out">B.E. Computer Science &amp; Engineering · CGPA 9.143</span>');
-      appendLine('<span class="t-out">Currently obsessed with: RAG, Bedrock, and making infra boringly reliable.</span>');
+      appendLine('<span class="t-out">Deven Kalathiya — AI Engineer based in Mumbai 🇮🇳</span>');
+      appendLine('<span class="t-out">I build AI agents that listen, reason, use tools and get real work done in production.</span>');
+      appendLine('<span class="t-out">4× AWS Certified · 1× Microsoft Certified · B.E. CSE (CGPA 9.143)</span>');
     },
 
     skills: () => {
-      appendLine('<span class="t-section">// DevOps &amp; Cloud</span>');
-      appendLine('<span class="t-out">AWS · Docker · Kubernetes · Jenkins · GitHub Actions · Terraform · Ansible · ArgoCD</span>');
-      appendLine('<span class="t-section">// AI &amp; ML</span>');
-      appendLine('<span class="t-out">Amazon Bedrock · Amazon Q · SageMaker basics · GitHub Copilot · LangChain · RAG patterns</span>');
-      appendLine('<span class="t-section">// Security &amp; DevSecOps</span>');
-      appendLine('<span class="t-out">WAF · Trivy · SonarQube · OWASP · DevSecOps pipelines</span>');
-      appendLine('<span class="t-section">// Observability</span>');
-      appendLine('<span class="t-out">CloudWatch · Prometheus · Grafana · Zabbix · New Relic</span>');
-      appendLine('<span class="t-section">// Languages</span>');
-      appendLine('<span class="t-out">Python · Bash · JavaScript · PHP · SQL</span>');
+      appendLine('<span class="t-section">// Agentic AI &amp; LLMs</span>');
+      appendLine('<span class="t-out">LangGraph · LangChain · Claude API · OpenAI API · MCP · Multi-Agent Systems · Tool Calling</span>');
+      appendLine('<span class="t-section">// RAG, Search &amp; Speech</span>');
+      appendLine('<span class="t-out">RAG · Embeddings · pgvector · OpenSearch · Whisper · Ollama · Amazon Bedrock · Amazon Q</span>');
+      appendLine('<span class="t-section">// Languages &amp; Frameworks</span>');
+      appendLine('<span class="t-out">Python · TypeScript · JavaScript · FastAPI · SQL</span>');
+      appendLine('<span class="t-section">// Cloud &amp; Infrastructure</span>');
+      appendLine('<span class="t-out">AWS · Docker · Kubernetes · Terraform · GitHub Actions · Jenkins</span>');
     },
 
     stack: () => commands.skills(),
 
     projects: () => {
-      appendLine('<span class="t-section">// Projects &amp; Pipelines</span>');
+      appendLine('<span class="t-section">// Featured Projects</span>');
       const projs = [
-        ['01', 'Jenkins-based CI/CD on Kubernetes', 'EKS · ArgoCD · Helm · Prometheus · Trivy'],
-        ['02', 'GitHub Actions DevSecOps Pipeline', 'Docker · GH Actions · Trivy · ArgoCD'],
-        ['03', 'Bedrock-Powered Slack Bot', 'Bedrock · Lambda · API Gateway · Terraform'],
-        ['04', 'RAG Documentation Assistant', 'Bedrock · OpenSearch · Python'],
-        ['05', 'AI-Assisted Log Analyzer', 'Amazon Q · CloudWatch · Lambda'],
-        ['06', 'Multi-Region Terraform Modules', 'Terraform · AWS · Atlantis'],
+        ['01', 'Meeting Intelligence Agent', 'LangGraph · Claude · Whisper · FastAPI', 'https://github.com/deven1003/meeting-intelligence-agent-showcase'],
+        ['02', 'InvestWise AI', 'LangGraph · LangChain · Claude · TypeScript', 'https://github.com/deven1003/investwise-ai-showcase'],
+        ['03', 'ShopEasy Support Agent', 'LangGraph · LangChain · Claude · RAG', 'https://github.com/deven1003/shopeasy-support-agent'],
       ];
       projs.forEach((p) => {
-        appendLine('<span class="t-prompt">' + p[0] + '</span> <strong>' + p[1] + '</strong>');
+        appendLine('<span class="t-prompt">' + p[0] + '</span> <a class="t-link" href="' + p[3] + '" target="_blank" rel="noreferrer"><strong>' + p[1] + '</strong></a>');
         appendLine('&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-out">' + p[2] + '</span>');
       });
     },
 
     experience: () => {
-      appendLine('<span class="t-section">// DevOps Engineer @ Feedspot · Jun 2024 – Present</span>');
-      appendLine('<span class="t-out">▹ Automated pipelines, +30% processing efficiency</span>');
-      appendLine('<span class="t-out">▹ Built containerized microservices integrating multiple third-party APIs</span>');
-      appendLine('<span class="t-out">▹ Designed CI/CD in GitHub Actions &amp; Jenkins</span>');
-      appendLine('<span class="t-out">▹ Configured WAF, firewall rules, monitoring (CloudWatch · Zabbix · New Relic)</span>');
-      appendLine('<span class="t-out">◇ Explored AI services on AWS (Q, Bedrock, Copilot) for internal R&amp;D</span>');
+      appendLine('<span class="t-section">// Feedspot · Jun 2024 – Present</span>');
+      appendLine('<span class="t-out">◇ RAG + pgvector semantic search over millions of podcast episodes</span>');
+      appendLine('<span class="t-out">◇ Production LLM integrations: Claude API, OpenAI API, Amazon Bedrock, Amazon Q</span>');
+      appendLine('<span class="t-out">▹ AI-assisted pipeline automation, +30% processing efficiency</span>');
+      appendLine('<span class="t-out">▹ Large-scale web crawling, microservices, CI/CD and monitoring</span>');
     },
 
     education: () => {
       appendLine('<span class="t-section">// Education</span>');
       appendLine('<span class="t-out">🎓 B.E. Computer Science &amp; Engineering · VCET (2020-2024) · CGPA 9.143</span>');
-      appendLine('<span class="t-out">📜 SSC (10th Grade) · Maharashtra State Board · 93%</span>');
       commands.certs();
     },
 
     certs: () => {
       appendLine('<span class="t-section">// Certifications</span>');
-      appendLine('<span class="t-success">✓ AWS Certified Cloud Practitioner (CLF-C02) · 2024</span>');
-      appendLine('<span class="t-warn">⏱ AWS Certified AI Practitioner (AIF-C01) · in progress · targeting Q3 2026</span>');
+      appendLine('<span class="t-success">✓ 4× AWS Certified (incl. Cloud Practitioner &amp; AI Practitioner)</span>');
+      appendLine('<span class="t-success">✓ 1× Microsoft Certified</span>');
     },
 
-    now: () => {
-      appendLine('<span class="t-section">// What I am learning right now</span>');
-      appendLine('<span class="t-out">▲ AWS AI Practitioner — 65% through study plan</span>');
-      appendLine('<span class="t-out">◐ LangChain &amp; RAG patterns — notebook series in progress</span>');
-      appendLine('<span class="t-out">◐ Kubernetes the Hard Way — 3/12 modules complete</span>');
-    },
-
-    vault: () => {
-      appendLine('<span class="t-section">// Study Vault — 4 free study sites</span>');
+    resources: () => {
+      appendLine('<span class="t-section">// Free study guides</span>');
       appendLine('<span class="t-out">🐳 Docker          · <a class="t-link" href="https://deven1003.github.io/study-vault-docker/" target="_blank" rel="noreferrer">study-vault-docker</a></span>');
       appendLine('<span class="t-out">⎈ Kubernetes      · <a class="t-link" href="https://deven1003.github.io/study-vault-kubernetes/" target="_blank" rel="noreferrer">study-vault-kubernetes</a></span>');
       appendLine('<span class="t-out">☁ AWS Cloud Prac. · <a class="t-link" href="https://deven1003.github.io/study-vault-aws-cloud-practitioner/" target="_blank" rel="noreferrer">study-vault-aws-cloud-practitioner</a></span>');
       appendLine('<span class="t-out">◇ AWS AI Prac.    · <a class="t-link" href="https://deven1003.github.io/study-vault-aws-ai-practitioner/" target="_blank" rel="noreferrer">study-vault-aws-ai-practitioner</a></span>');
     },
 
-    ai: () => commands.vault(),
-    study: () => commands.vault(),
+    vault: () => commands.resources(),
 
     contact: () => {
       appendLine('<span class="t-section">// Contact</span>');
       appendLine('<span class="t-out">✉ <a class="t-link" href="mailto:devengkalathiya@gmail.com">devengkalathiya@gmail.com</a></span>');
       appendLine('<span class="t-out">in <a class="t-link" href="https://www.linkedin.com/in/deven-kalathiya/" target="_blank" rel="noreferrer">linkedin.com/in/deven-kalathiya</a></span>');
       appendLine('<span class="t-out">⌥ <a class="t-link" href="https://github.com/deven1003" target="_blank" rel="noreferrer">github.com/deven1003</a></span>');
-    },
-
-    socials: () => {
-      commands.contact();
-      appendLine('<span class="t-out">◎ <a class="t-link" href="https://www.instagram.com/devenkalathiya/" target="_blank" rel="noreferrer">instagram.com/devenkalathiya</a></span>');
-      appendLine('<span class="t-out">♞ <a class="t-link" href="https://www.chess.com/member/devenkalathiya" target="_blank" rel="noreferrer">chess.com/@devenkalathiya</a></span>');
     },
 
     github: () => {
@@ -317,8 +293,7 @@
         '\n├── stack/' +
         '\n├── experience/' +
         '\n├── projects/' +
-        '\n├── study-vault/    <span class="t-cmd-hint">// 4 free study sites — try `vault`</span>' +
-        '\n├── now/' +
+        '\n├── resources/' +
         '\n├── education/' +
         '\n└── contact/</pre>');
     },
@@ -332,23 +307,23 @@
       const files = {
         'about.md': () => {
           appendLine('<span class="t-section"># About</span>');
-          appendLine('<span class="t-out">I am a Cloud + DevOps engineer who got curious about AI and never looked back.</span>');
-          appendLine('<span class="t-out">Focus: making cloud + AI systems reliable, automated, and explainable.</span>');
-          appendLine('<span class="t-out">Output: notes, study guides, and reference architectures — free for anyone learning the same stack.</span>');
+          appendLine('<span class="t-out">I am an AI Engineer building agentic AI systems that run in production.</span>');
+          appendLine('<span class="t-out">Focus: multi-agent workflows, RAG, voice AI, and AI outputs you can verify.</span>');
+          appendLine('<span class="t-out">Stack: LangGraph · Claude · MCP · RAG · Whisper, on AWS infrastructure.</span>');
         },
         'capabilities.json': () => {
           appendLine('<pre class="t-tree">{' +
-            '\n  "devops":   ["AWS", "Docker", "K8s", "Terraform", "Jenkins", "GH Actions"],' +
-            '\n  "ai":       ["Bedrock", "Amazon Q", "SageMaker", "LangChain", "RAG", "Copilot"],' +
-            '\n  "security": ["WAF", "Trivy", "SonarQube", "OWASP"],' +
-            '\n  "obs":      ["CloudWatch", "Prometheus", "Grafana", "New Relic"],' +
-            '\n  "lang":     ["Python", "Bash", "JS", "PHP", "SQL"]' +
+            '\n  "agentic_ai": ["LangGraph", "LangChain", "Claude", "OpenAI", "MCP"],' +
+            '\n  "rag": ["Embeddings", "pgvector", "OpenSearch", "Bedrock"],' +
+            '\n  "speech": ["Whisper", "Voice agents"],' +
+            '\n  "lang": ["Python", "TypeScript", "FastAPI", "SQL"],' +
+            '\n  "infra": ["AWS", "Docker", "Kubernetes", "Terraform"]' +
             '\n}</pre>');
         },
         'readme.md': () => {
           appendLine('<span class="t-section"># Deven Kalathiya — Portfolio</span>');
-          appendLine('<span class="t-out">A learn-in-public site documenting Cloud, DevOps, and AI.</span>');
-          appendLine('<span class="t-out">Free study vault: type <span class="t-cmd-hint">help</span> to navigate.</span>');
+          appendLine('<span class="t-out">AI Engineer portfolio: agentic AI projects, experience and stack.</span>');
+          appendLine('<span class="t-out">Type <span class="t-cmd-hint">help</span> to navigate.</span>');
         },
       };
       if (files[file]) files[file]();
